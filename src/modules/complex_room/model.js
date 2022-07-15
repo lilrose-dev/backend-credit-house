@@ -26,8 +26,28 @@ const COMPANY_ROOM = `
 
 `
 
+const NEW_COMPLEX_ROOM = `
+    INSERT INTO complexes_room(complexes_room_price, complexes_room_size, complexes_id, complexes_room_counts)
+    VALUES($1, $2, $3, $4)
+`
+
+const EDIT_COMPLEX_ROOM = `
+    UPDATE complexes_room SET complexes_room_price = $1, complexes_room_size = $2, complexes_room_counts = $3
+    WHERE complexes_room_id = $4
+`
+
+const DELETE_COMPLEX_ROOM = `
+    DELETE complexes_room WHERE complexes_room_id = $1
+`
+
 const complexRoom = (complexId) => fetch(COMPANY_ROOM, complexId)
+const newComplexRoom = (price, count, size, complexID) => fetch(NEW_COMPLEX_ROOM, price, count, size, complexID)
+const editComplexRoom = (price, size, count) => fetch(EDIT_COMPLEX_ROOM, price, size, count)
+const delComplexRoom = (id) => fetch(DELETE_COMPLEX_ROOM, id)
 
 module.exports = {
-    complexRoom
+    complexRoom,
+    newComplexRoom,
+    editComplexRoom,
+    delComplexRoom
 }

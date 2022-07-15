@@ -2,18 +2,33 @@ const express = require('express')
 const router = express.Router()
 
 
-const companyModule = require('./building_company/building_company')
-const complexesModule = require('./complexes/complexes')
+const company = require('./building_company/building_company')
+const complexes = require('./complexes/complexes')
 const complexesRoom = require('./complex_room/complex_room')
 const calcRoom = require('./complex_calc/complex_calc')
 const bankData = require('../modules/bank/bank')
 
 router
-    .get('/', companyModule.GET)
-    .post('/newBuilding', companyModule.POST)
-    .get('/bank/:id/:year', bankData.GET_B)
-    .get('/:id', complexesModule.GET_comp)
+    .get('/', company.GET)
+    .post('/newBuilding', company.POST)
+    .put('/updateBuilding', company.UPDATE)
+    .delete('/deleteBuilding', company.DELETE)
+
+    .get('/:id', complexes.GET_comp)
+    .post('/newComplex', complexes.POST)
+    .put('/updateComplex', complexes.UPDATE)
+    .delete('/deleteComplex', complexes.DELETE)
+    
     .get('/:id/:id', complexesRoom.GET_ROOM)
-    .get('/:id/:id/:id', calcRoom.GET_ROOM_CALC)
+    .post('/newComplexRoom', complexesRoom.POST)
+    .put('/updateComplexRoom', complexesRoom.UPDATE)
+    .delete('/delComplexRoom', complexesRoom.DELETE)
+
+    // .get('/:id/:id/:id', calcRoom.GET_ROOM_CALC)
+    .get('/bank/:id/:year', bankData.GET_B)
+    .get('/bank', bankData.GET)
+    .post('/newBank', bankData.POST)
+    .put('/updateBank', bankData.UPDATE)
+    .delete('/delBank', bankData.DELETE)
 
 module.exports = router

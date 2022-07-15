@@ -9,5 +9,32 @@ module.exports = {
         }catch(err) {
             res.sendStatus(500)
         }
+    },
+
+    POST: async (req, res) => {
+        try {
+            const { name, companyID } = req.body
+            res.json(await model.newComplex(name, companyID))
+        } catch (err) {
+            res.sendStatus(500)
+        }
+    },
+
+    UPDATE: async (req, res) => {
+        try {
+            const { name, id } = req.body
+            res.json(await model.editComplex(name, id))
+        } catch (err) {
+            res.sendStatus(500)
+        }
+    },
+
+    DELETE: async (req, res) => {
+        try{
+            const { id } = req.body
+            res.json(await model.delComplex(id))
+        }catch (err) {
+            res.sendStatus(500)
+        }
     }
 }

@@ -22,9 +22,27 @@ const COMPANY = `
 
 `
 
+const NEW_COMPLEX = `
+    INSERT INTO complexes(complexes_name, building_company_id)
+        VALUES($1, $2)
+`
+
+const EDIT_COMPLEX = `
+    UPDATE complexes SET complexes_name = $1 WHERE complexes_id = $2
+`
+
+const DELETE_COMPLEX = `
+    DELETE FROM complexes WHERE complexes_id = $1
+`
 
 const complexes = (complexID) => fetch(COMPANY, complexID)
+const newComplex = (name, companyID) => fetch(NEW_COMPLEX, name, companyID)
+const editComplex = (name, id) => fetch(EDIT_COMPLEX, name, id)
+const delComplex = (id) => fetch(DELETE_COMPLEX, id)
 
 module.exports = {
-    complexes
+    complexes,
+    newComplex,
+    editComplex,
+    delComplex
 }       

@@ -8,15 +8,14 @@ CREATE TABLE building_company(
 CREATE TABLE complexes(
     complexes_id SERIAL PRIMARY KEY NOT NULL,
     complexes_name TEXT,
-    complexes_address TEXT,
     building_company_id INT REFERENCES building_company(building_company_id) ON DELETE CASCADE
 );
 
 CREATE TABLE complexes_room (
     complexes_room_id SERIAL PRIMARY KEY NOT NULL,
-    complexes_room_price BIGINT,
+    complexes_room_price INT,
     complexes_room_counts INT,
-    complexes_room_size BIGINT,
+    complexes_room_size INT,
     complexes_id INT REFERENCES complexes(complexes_id) ON DELETE CASCADE
 );
 
@@ -48,6 +47,7 @@ $$;
 
 
 ----bank calc
+
 CREATE OR REPLACE FUNCTION bankCalc(id INT)
 RETURNS TABLE(bankId INT, bankName TEXT, bankUpto INT, startingPayment INT, bankService INT)
 LANGUAGE plpgsql
@@ -63,7 +63,7 @@ BEGIN
     FROM
         bank
     WHERE
-        upto - (SELECT * FROM house_price(id)) = (SELECT MIN(upto) - (SELECT * FROM house_price(id))
+        upto - (SELECT * FROM house_price(id)) = (SELECT MIN(upto - (SELECT * FROM house_price(id)))
         FROM bank WHERE upto > (SELECT * FROM house_price(id)));
 END
 $$;
@@ -71,8 +71,7 @@ $$;
 
 ---bank calc with year
 
-
-CREATE FUNCTION calc(id int, year int)
+CREATE FUNCTION calc_info(id int, year int)
 RETURNS TABLE(house_price int, bank_startingpayment int, monthly_payment int, bankservice int)
 LANGUAGE plpgsql
 AS
@@ -82,29 +81,34 @@ BEGIN
     RETURN 
     QUERY 
     SELECT  
-    (SELECT * FROM house_price(id)),
-    (SELECT 
-        starting_payment * ((SELECT * FROM house_price(id)) / 100)
+        (SELECT * FROM house_price(id)),
+        (SELECT 
+            starting_payment * ((SELECT * FROM house_price(id)) / 100)
+        FROM 
+            bank
+        WHERE 
+            upto -(SELECT * FROM house_price(id)) = (SELECT MIN(upto-(SELECT * FROM house_price(id))) FROM bank
+            WHERE upto > (SELECT * FROM house_price(id)))),
+        (((SELECT * FROM house_price(id)) - (SELECT 
+            starting_payment *((SELECT * FROM house_price(id)) / 100)
+        FROM 
+            bank 
+        WHERE 
+            upto-(SELECT * FROM house_price(id)) = (SELECT MIN(upto-(SELECT * FROM house_price(id))) FROM bank 
+            WHERE upto > (SELECT * FROM house_price(id)))))/ (year * 12)),
+        (SELECT 
+            bank_service
+        FROM 
+            bank 
+        WHERE 
+            upto-(SELECT * FROM house_price(id)) = (SELECT MIN(upto-(SELECT * FROM house_price(id))) FROM bank
+            WHERE upto > (SELECT * FROM house_price(id))))
     FROM 
-        bank
+        complexes_room 
     WHERE 
-        upto-(SELECT * FROM house_price(id)) = (SELECT MIN(upto-(SELECT * FROM house_price(id))) FROM bank
-        WHERE upto > (SELECT * FROM house_price(id)))),
-    (((SELECT * FROM house_price(id)) - (SELECT 
-        starting_payment *((SELECT * FROM house_price(id)) / 100)
-    FROM 
-        bank 
-    WHERE 
-        upto-(SELECT * FROM house_price(id)) = (SELECT MIN(upto-(SELECT * FROM house_price(id))) FROM bank 
-        WHERE upto > (SELECT * FROM house_price(id)))))/ (year * 12)),
-    (SELECT 
-        bank_service
-    FROM 
-        bank 
-    WHERE 
-        upto-(SELECT * FROM house_price(id)) = (SELECT MIN(upto-(SELECT * FROM house_price(id))) FROM bank
-        WHERE upto > (SELECT * FROM house_price(id))))
-    FROM complexes_room WHERE complexes_room_id = id;
+        complexes_room_id = id;
 
 END
 $$;
+
+

@@ -18,5 +18,23 @@ module.exports = {
         } catch(err) {
             res.sendStatus(500)
         }
+    },
+
+    UPDATE: async(req, res) => {
+        try {
+            const { name, id } = req.body
+            res.json(await model.editCompany(name, id))
+        } catch (error) {
+            res.sendStatus(500)
+        }
+    },
+    
+    DELETE: async(req, res) => {
+        try{
+            const { id } = req.body
+            res.json(await model.delCompany(id))
+        }catch(errr){
+            res.sendStatus(500)
+        }
     }
 }
