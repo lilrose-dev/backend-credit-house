@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const PORT = 8000
+const PORT = process.env.PORT || 8000
 const modules = require('./modules')
 const ejs = require('ejs')
 const path = require('path')
