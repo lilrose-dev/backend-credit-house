@@ -3,7 +3,7 @@ const model = require('./model')
 module.exports = {
     GET: async (_, res) => {
         try{
-            const banks = await model.bank
+            const banks = await model.bank()
             res.json(banks)
         }catch(err) {
             res.sendStatus(500)
