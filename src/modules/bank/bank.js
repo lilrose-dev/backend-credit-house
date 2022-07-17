@@ -1,15 +1,12 @@
 const model = require('./model')
 
 module.exports = {
-    GET: async (_, res) => {
+    GET_all: async (_, res) => {
         try{
             res.json(await model.bank())
         }catch (err){
             res.sendStatus(500)
         }
-        
-            
-    
     },
 
     GET_B: async(req, res) => {
