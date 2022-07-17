@@ -26,7 +26,7 @@ router
 
     // .get('/:id/:id/:id', calcRoom.GET_ROOM_CALC)
     .get('/bank/:id/:year', bankData.GET_B)
-    .get('/bank', bankData.GET)
+    .get('/banks', bankData.GET)
     .post('/newBank', bankData.POST)
     .put('/updateBank', bankData.UPDATE)
     .delete('/delBank', bankData.DELETE)
