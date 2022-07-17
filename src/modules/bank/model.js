@@ -9,7 +9,7 @@ const CALC = `
     SELECT * FROM calc_info($1, $2)
 `
 
-const ALL_BANK_DATA = `
+const ALL_BANK = `
     SELECT * FROM bank
 `
 
@@ -27,7 +27,7 @@ const DEL_BANK = `
     DELETE FROM bank WHERE bank_id = $1
 `
 
-const bank = () => fetchAll(ALL_BANK_DATA)
+const bank = () => fetchAll(ALL_BANK)
 const Bank_Info = (bankId) => fetch(BANK, bankId)
 const Calc_All = (bankId, bankYear) => fetch(CALC, bankId, bankYear)
 
