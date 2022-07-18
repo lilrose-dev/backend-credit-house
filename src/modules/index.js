@@ -10,6 +10,10 @@ const bankData = require('../modules/bank/bank')
 
 router
     .get('/', company.GET)
+    .get('/bank', bankData.GET_DATA)
+    .get('/complex',complexes.GET)
+    .get('/complexRoom', complexesRoom.GET)
+
     .post('/newBuilding', company.POST)
     .put('/updateBuilding', company.UPDATE)
     .delete('/deleteBuilding', company.DELETE)
@@ -25,7 +29,6 @@ router
     .delete('/delComplexRoom', complexesRoom.DELETE)
 
     // .get('/:id/:id/:id', calcRoom.GET_ROOM_CALC)
-    .get('/bank/getBank', bankData.GET)
     .post('/newBank', bankData.POST)
     .put('/updateBank', bankData.UPDATE)
     .delete('/delBank', bankData.DELETE)

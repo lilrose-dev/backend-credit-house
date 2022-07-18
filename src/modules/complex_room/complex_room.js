@@ -2,6 +2,15 @@ const model = require('./model')
 
 
 module.exports = {
+
+    GET: async (_, res)=> {
+        try {
+            res.json(await model.rooms())
+        } catch (error) {
+            res.sendStatus(500)
+        }
+    },
+
     GET_ROOM: async (req, res) => {
         try {
             const { id } = req.params

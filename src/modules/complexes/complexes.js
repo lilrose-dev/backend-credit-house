@@ -2,6 +2,15 @@ const model = require('./model')
 
 
 module.exports = {
+
+    GET: async(req, res) => {
+        try{
+            res.json(await model.getComplexes())
+        }catch (err){
+            res.sendStatus(500)
+        }
+    },
+
     GET_comp: async (req, res) => {
         try {
             const { id } = req.params

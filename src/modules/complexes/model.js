@@ -1,5 +1,12 @@
 const { fetch, fetchAll } = require('../../utils/postgres')
 
+const ALL_COMPLEX = `
+    SELECT 
+        *
+    FROM
+        complexes
+`
+
 const COMPANY = `
     SELECT 
         b.building_company_id AS company_id,
@@ -35,12 +42,14 @@ const DELETE_COMPLEX = `
     DELETE FROM complexes WHERE complexes_id = $1
 `
 
+const getComplexes = () => fetchAll(ALL_COMPLEX)
 const complexes = (complexID) => fetch(COMPANY, complexID)
 const newComplex = (name, companyID) => fetch(NEW_COMPLEX, name, companyID)
 const editComplex = (name, id) => fetch(EDIT_COMPLEX, name, id)
 const delComplex = (id) => fetch(DELETE_COMPLEX, id)
 
 module.exports = {
+    getComplexes,
     complexes,
     newComplex,
     editComplex,

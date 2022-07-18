@@ -1,6 +1,13 @@
 const { fetch, fetchAll } = require('../../utils/postgres')
 
 
+const ALL_BANK = `
+    SELECT 
+        * 
+    FROM 
+        bank
+`
+
 const BANK =  `
     SELECT * FROM bankCalc($1)
 `
@@ -9,9 +16,6 @@ const CALC = `
     SELECT * FROM calc_info($1, $2)
 `
 
-const ALL_BANK = `
-    SELECT * FROM bank
-`
 
 const NEW_BANK = `
     INSERT INTO bank(bank_name, upto, starting_payment, bank_service)
