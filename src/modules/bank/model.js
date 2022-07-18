@@ -23,7 +23,8 @@ const NEW_BANK = `
 `
 
 const EDIT_BANK = `
-    UPDATE bank SET bank_name = $1, upto = $2, starting_payment = $3, bank_service = $4 
+    UPDATE bank 
+    SET bank_name = $1, upto = $2, starting_payment = $3, bank_service = $4 
     WHERE bank_id = $5
 `
 
@@ -36,7 +37,7 @@ const Bank_Info = (bankId) => fetch(BANK, bankId)
 const Calc_All = (bankId, bankYear) => fetch(CALC, bankId, bankYear)
 
 const newBank = (name, upto, startingPayment, service) => fetch(NEW_BANK, name, upto, startingPayment, service)
-const editBank = (name, upto, startingPayment, service) => fetch(EDIT_BANK, name, upto, startingPayment, service)
+const editBank = (name, upto, startingPayment, service, id) => fetch(EDIT_BANK, name, upto, startingPayment, service, id)
 const delBank = (id) => fetch(DEL_BANK, id)
 
 module.exports = {

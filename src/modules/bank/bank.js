@@ -35,8 +35,9 @@ module.exports = {
 
     UPDATE: async (req, res) => {
         try{
-            const { name, upto, startingPayment, service } = req.body
-            res.json(await model.editBank(name, upto, startingPayment, service))
+            const { name, upto, startingPayment, service, id } = req.body
+            const oldData = (await model.getBanks()).find(e => e.bank_id == id)  
+            res.json(await model.editBank(name ? name : oldData.bank_name, upto ? upto : oldData.upto, startingPayment ? startingPayment : oldData.starting_payment, service ? service : oldData.bank_service, id))
         }catch(err) {
             res.sendStatus(500)
         }
