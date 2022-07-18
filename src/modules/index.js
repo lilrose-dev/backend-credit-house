@@ -25,7 +25,7 @@ router
     .delete('/delComplexRoom', complexesRoom.DELETE)
 
     // .get('/:id/:id/:id', calcRoom.GET_ROOM_CALC)
-    .get('/bank/getBank', bankData.GET_all)
+    .get('/bank/getBank', bankData.GET)
     .post('/newBank', bankData.POST)
     .put('/updateBank', bankData.UPDATE)
     .delete('/delBank', bankData.DELETE)

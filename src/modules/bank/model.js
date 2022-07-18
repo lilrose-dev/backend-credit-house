@@ -27,7 +27,7 @@ const DEL_BANK = `
     DELETE FROM bank WHERE bank_id = $1
 `
 
-const bank = () => fetchAll(ALL_BANK)
+const getBanks = () => fetchAll(ALL_BANK)
 const Bank_Info = (bankId) => fetch(BANK, bankId)
 const Calc_All = (bankId, bankYear) => fetch(CALC, bankId, bankYear)
 
@@ -36,7 +36,7 @@ const editBank = (name, upto, startingPayment, service) => fetch(EDIT_BANK, name
 const delBank = (id) => fetch(DEL_BANK, id)
 
 module.exports = {
-    bank,
+    getBanks,
     Bank_Info, 
     Calc_All,
     newBank,
