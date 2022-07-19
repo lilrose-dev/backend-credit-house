@@ -23,7 +23,8 @@ module.exports = {
     UPDATE: async(req, res) => {
         try {
             const { name, id } = req.body
-            res.json(await model.editCompany(name, id))
+            const oldData = (await model.company()).find(e => e.building_company_id == id)  
+            res.json(await model.editCompany(name ? name : oldData.building_company_name, id))
         } catch (error) {
             res.sendStatus(500)
         }
