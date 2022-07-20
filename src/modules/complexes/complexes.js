@@ -3,7 +3,7 @@ const model = require('./model')
 
 module.exports = {
 
-    GET: async(req, res) => {
+    GET: async(_, res) => {
         try{
             res.json(await model.getComplexes())
         }catch (err){

@@ -31,8 +31,8 @@ module.exports = {
 
     UPDATE: async (req, res) => {
         try{
-            const { price, count, size } = req.body
-            res.json(await model.editComplexRoom(price, count, size))
+            const { price, count, size, id } = req.body
+            res.json(await model.editComplexRoom(price, count, size, id))
         }catch (err) {
             res.sendStatus(500)
         }

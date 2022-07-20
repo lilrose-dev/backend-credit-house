@@ -47,7 +47,7 @@ const DELETE_COMPLEX_ROOM = `
 const rooms = () => fetchAll(ROOM)
 const complexRoom = (complexId) => fetch(COMPANY_ROOM, complexId)
 const newComplexRoom = (price, count, size, complexID) => fetch(NEW_COMPLEX_ROOM, price, count, size, complexID)
-const editComplexRoom = (price, size, count) => fetch(EDIT_COMPLEX_ROOM, price, size, count)
+const editComplexRoom = (price, size, count, id) => fetch(EDIT_COMPLEX_ROOM, price, size, count, id)
 const delComplexRoom = (id) => fetch(DELETE_COMPLEX_ROOM, id)
 
 module.exports = {
