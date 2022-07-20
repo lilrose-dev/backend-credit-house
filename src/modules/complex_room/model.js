@@ -41,7 +41,7 @@ const EDIT_COMPLEX_ROOM = `
 `
 
 const DELETE_COMPLEX_ROOM = `
-    DELETE complexes_room FROM complexes_room_id = $1
+    DELETE FROM complexes_room WHERE complexes_room_id = $1
 `
 
 const rooms = () => fetchAll(ROOM)
