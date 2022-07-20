@@ -31,7 +31,7 @@ const ROOM = `
 `
 
 const NEW_COMPLEX_ROOM = `
-    INSERT INTO complexes_room(complexes_room_price, complexes_room_size, complexes_id, complexes_room_counts)
+    INSERT INTO complexes_room(complexes_room_price, complexes_room_counts, complexes_room_size, complexes_id, )
     VALUES($1, $2, $3, $4)
 `
 
