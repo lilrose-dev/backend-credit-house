@@ -33,7 +33,7 @@ module.exports = {
         try{
             const { price, count, size, id } = req.body
             const oldData = (await model.rooms()).find(e => e.complexes_room_id == id)  
-            res.json(await model.editComplexRoom(price ? price : oldData.complexes_room_price, count ? count : oldData.complexes_room_count, size ? size : oldData.complexes_room_size, id))
+            res.json(await model.editComplexRoom(price ? price : oldData.complexes_room_price, count ? count : oldData.complexes_room_counts, size ? size : oldData.complexes_room_size, id))
         }catch (err) {
             res.sendStatus(500)
         }
