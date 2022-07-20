@@ -32,7 +32,8 @@ module.exports = {
     UPDATE: async (req, res) => {
         try {
             const { name, id } = req.body
-            res.json(await model.editComplex(name, id))
+            const oldData = (await model.getComplexes()).find(e => e.complexes_id == id)  
+            res.json(await model.editComplex(name ? name : oldData.complexes_name, id))
         } catch (err) {
             res.sendStatus(500)
         }
