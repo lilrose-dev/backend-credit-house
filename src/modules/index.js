@@ -13,6 +13,7 @@ router
     .get('/bank', bankData.GET_DATA)
     .get('/complex',complexes.GET)
     .get('/complexRoom', complexesRoom.GET)
+    .get('/room', complexesRoom.GET)
 
     .post('/newBuilding', company.POST)
     .put('/updateBuilding', company.UPDATE)
