@@ -15,11 +15,10 @@ router
     .get('/complexRoom', complexesRoom.GET)
     .get('/room', complexesRoom.GET)
 
-    .put('/updateComplexRoom', complexesRoom.UPDATE)
     .post('/newBuilding', company.POST)
     .put('/updateBuilding', company.UPDATE)
     .delete('/deleteBuilding', company.DELETE)
-
+    
     .get('/:id', complexes.GET_comp)
     .post('/newComplex', complexes.POST)
     .put('/updateComplex', complexes.UPDATE)
@@ -27,6 +26,7 @@ router
     
     .get('/:id/:id', complexesRoom.GET_ROOM)
     .post('/newComplexRoom', complexesRoom.POST)
+    .put('/updateComplexRoom', complexesRoom.UPDATE)
     .delete('/delComplexRoom', complexesRoom.DELETE)
     
     // .get('/:id/:id/:id', calcRoom.GET_ROOM_CALC)
