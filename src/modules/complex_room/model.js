@@ -36,7 +36,7 @@ const NEW_COMPLEX_ROOM = `
 `
 
 const EDIT_COMPLEX_ROOM = `
-    UPDATE complexes_room SET complexes_room_price = $1, complexes_room_size = $2, complexes_room_counts = $3
+    UPDATE complexes_room SET complexes_room_price = $1, complexes_room_counts = $2, complexes_room_size = $3,
     WHERE complexes_room_id = $4
 `
 
@@ -47,7 +47,7 @@ const DELETE_COMPLEX_ROOM = `
 const rooms = () => fetchAll(ROOM)
 const complexRoom = (complexId) => fetch(COMPANY_ROOM, complexId)
 const newComplexRoom = (price, count, size, complexID) => fetch(NEW_COMPLEX_ROOM, price, count, size, complexID)
-const editComplexRoom = (price, size, count, id) => fetch(EDIT_COMPLEX_ROOM, price, size, count, id)
+const editComplexRoom = (price,count, size, id) => fetch(EDIT_COMPLEX_ROOM, price, count, size, id)
 const delComplexRoom = (id) => fetch(DELETE_COMPLEX_ROOM, id)
 
 module.exports = {
